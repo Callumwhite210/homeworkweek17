@@ -2,6 +2,8 @@ const express = require("express");
 const mongojs = require("mongojs");
 const logger = require("morgan");
 
+const db = require("../server.js")
+
 let path = require("path")
 let router = express.Router()
 
