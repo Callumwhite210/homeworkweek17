@@ -1,24 +1,25 @@
 const express = require("express");
-const mongojs = require("mongojs");
-const logger = require("morgan");
+const mongoose = require("mongoose");
+const db = require("../models")
 
-const db = require("../server.js")
+const router = express.Router();
 
-let path = require("path")
-let router = express.Router()
+//connect to mongoose
+mongoose.connect(process.env.MONGODB_URI, 
+    {   useNewUrlParser: true, 
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+        useFindAndModify: false
+      });
 
-//routing 
 
-router.get("/", (req, res) => {
-    res.sendFile(path.join("/index.html"));
-});
+//routing
+router.get("/api/workouts", function(req, res){
+    db.Workout.find({})
+        .then((data) => {
+            res.json(data);
+        });
+    });
 
-router.get("/exercise", (req, res) => {
-    res.sendFile(path.join("/exercise.html"));
-});
-
-router.get("/stats", (req, res) => {
-    res.sendFile(path.join("/stats.html"));
-});
-
+      
 module.exports = router;
