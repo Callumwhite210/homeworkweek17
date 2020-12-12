@@ -3,7 +3,7 @@ const app = express()
 
 const router = require("./controller/routes.js")
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 app.use(express.static ('/public'));
 
